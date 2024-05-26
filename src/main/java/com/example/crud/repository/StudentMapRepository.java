@@ -1,20 +1,30 @@
-package com.example.test.repositories;
+package com.example.crud.repository;
 
-import com.example.test.model.dto.StudentDto;
+import com.example.crud.model.dto.StudentDto;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 
+/**
+ * Singleton Class for the HashMap with id and StudentDto.
+ *
+ * @author Abdelaziz Said
+ */
 public class StudentMapRepository {
 
-    // Shared Resource
-    // Lazy Instantiation
-    private static Map<Integer, StudentDto> instance;
+    private static Map<String, StudentDto> instance;
 
     private StudentMapRepository() {
     }
 
-    public static Map<Integer, StudentDto> getInstance() {
+    /**
+     * Returns an instance of the Singleton HashMap with id and StudentDto.
+     * If the instance does not exist, it creates a new instance.
+     *
+     * @return the instance of the Singleton HashMap with id and StudentDto.
+     */
+    public static Map<String, StudentDto> getInstance() {
         if (instance == null) {
             synchronized (StudentMapRepository.class) {
                 if (instance == null) {

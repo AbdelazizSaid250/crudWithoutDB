@@ -1,2 +1,12 @@
-package com.example.crud.model.dto;public class Address {
+package com.example.crud.model.dto;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+
+@Data
+@AllArgsConstructor
+public class Address {
+    private String country;
+    private String city;
+    private String street;
 }
