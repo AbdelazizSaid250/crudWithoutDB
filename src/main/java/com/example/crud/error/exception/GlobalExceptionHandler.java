@@ -26,4 +26,12 @@ public class GlobalExceptionHandler {
 
         return new ResponseEntity<>(errorResponse, HttpStatus.NOT_FOUND);
     }
+
+    @ExceptionHandler(DateTimeValidationException.class)
+    public ResponseEntity<ErrorResponse> handleDateTimeValidationException(DateTimeValidationException exception) {
+        ErrorResponse errorResponse = new ErrorResponse(exception.getErrorCode(), exception.getErrorMessage(),
+                exception.getDescription(), getCurrentTimestamp());
+
+        return new ResponseEntity<>(errorResponse, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
 }

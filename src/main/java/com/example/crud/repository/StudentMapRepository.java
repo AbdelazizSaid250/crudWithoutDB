@@ -4,7 +4,6 @@ import com.example.crud.model.dto.StudentDto;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.UUID;
 
 /**
  * Singleton Class for the HashMap with id and StudentDto.

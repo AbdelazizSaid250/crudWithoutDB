@@ -1,13 +1,35 @@
 package com.example.crud.model.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
+import jakarta.validation.constraints.*;
+import lombok.Value;
 
-@Data
-@AllArgsConstructor
+@Value
 public class StudentDto {
-    private String name;
-    private int age;
-    private String email;
-    private Address address;
+    @NotBlank(message = "Name is required and cannot be empty!!")
+    @Size(min = 2, max = 30, message = "Name length must be between 2 and 30 characters")
+    String name;
+
+    @NotNull(message = "Age is required")
+    @Min(value = 18, message = "Age must be at least 18")
+    @Max(value = 60, message = "Age must not be greater that 60")
+    int age;
+
+    @NotBlank(message = "Email is required and cannot be empty!!")
+    @Email(message = "Email is not valid")
+    String email;
+
+    @NotNull(message = "Degree is required")
+    @Min(value = 0, message = "Degree must be greater than")
+    @Max(value = 100, message = "Degree must not exceed 100")
+    Float degree;
+
+//    @NotBlank(message = "Phone is required and cannot be empty!!")
+//    @Pattern(regexp = "^01[0-2]\\s\\d{1,8}$", message = "Mobile number must be valid")
+    String phone;
+
+    @NotBlank(message = "Enrollment Date is required and cannot be empty!!")
+    @Pattern(regexp = "^\\d{4}-\\d{2}-\\d{2}$", message = "Enrollment Date must be formatted with the right format")
+    String enrollmentDate;
+
+    Address address;
 }

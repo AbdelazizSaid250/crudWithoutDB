@@ -1,7 +1,10 @@
 package com.example.crud.controller;
 
+import com.example.crud.error.exception.DateTimeValidationException;
+import com.example.crud.error.exception.StudentAgeException;
 import com.example.crud.model.dto.StudentDto;
 import com.example.crud.service.student.StudentService;
+import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -24,7 +27,7 @@ public class StudentController {
     }
 
     @PostMapping("save")
-    public void saveApi(@RequestBody StudentDto studentDto) {
+    public void saveApi(@Valid @RequestBody StudentDto studentDto) throws StudentAgeException, DateTimeValidationException {
         String methodName = CLASS_NAME + ".saveApi()";
         studentService.save(studentDto);
         log.info("{}, Successfully saved student into our transient DB: {}", methodName, studentDto);
@@ -45,7 +48,7 @@ public class StudentController {
     }
 
     @PutMapping("update/{id}")
-    public void updateApi(@PathVariable String id, @RequestBody StudentDto studentDto) {
+    public void updateApi(@PathVariable String id, @Valid @RequestBody StudentDto studentDto) {
         String methodName = CLASS_NAME + ".updateApi()";
         studentService.update(id, studentDto);
         log.info("{}, Successfully updated student in our transient DB: {}", methodName, studentDto);
