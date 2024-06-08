@@ -3,6 +3,7 @@ package com.example.crud.error.exception;
 import com.example.crud.error.model.ErrorResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
@@ -10,6 +11,14 @@ import static com.example.crud.util.timing.TimeUtils.getCurrentTimestamp;
 
 @RestControllerAdvice
 public class GlobalExceptionHandler {
+
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public ResponseEntity<ErrorResponse> handleValidationException(MethodArgumentNotValidException exception) {
+
+        ErrorResponse errorResponse = new ErrorResponse(10003, "validationException", exception.getFieldError().getDefaultMessage(), getCurrentTimestamp());
+
+        return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
+    }
 
     @ExceptionHandler(StudentAgeException.class)
     public ResponseEntity<ErrorResponse> handleStudentAgeException(StudentAgeException exception) {

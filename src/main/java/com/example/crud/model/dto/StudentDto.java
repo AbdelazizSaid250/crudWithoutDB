@@ -11,7 +11,7 @@ public class StudentDto {
 
     @NotNull(message = "Age is required")
     @Min(value = 18, message = "Age must be at least 18")
-    @Max(value = 60, message = "Age must not be greater that 60")
+    @Max(value = 30, message = "Age must not be greater that 60")
     int age;
 
     @NotBlank(message = "Email is required and cannot be empty!!")
@@ -23,13 +23,13 @@ public class StudentDto {
     @Max(value = 100, message = "Degree must not exceed 100")
     Float degree;
 
-//    @NotBlank(message = "Phone is required and cannot be empty!!")
-//    @Pattern(regexp = "^01[0-2]\\s\\d{1,8}$", message = "Mobile number must be valid")
+    @NotBlank(message = "Phone is required and cannot be empty!!")
+    @Pattern(regexp = "^\\+201[0-2,5]\\d{8}$", message = "Mobile number must be valid")
     String phone;
 
     @NotBlank(message = "Enrollment Date is required and cannot be empty!!")
     @Pattern(regexp = "^\\d{4}-\\d{2}-\\d{2}$", message = "Enrollment Date must be formatted with the right format")
     String enrollmentDate;
 
-    Address address;
+    AddressDto addressDto;
 }

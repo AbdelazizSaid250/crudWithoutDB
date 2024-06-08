@@ -33,11 +33,28 @@ public class StudentController {
         log.info("{}, Successfully saved student into our transient DB: {}", methodName, studentDto);
     }
 
-    @GetMapping("find/{id}")
+    @GetMapping("find/id/{id}")
     public StudentDto findByIdApi(@PathVariable String id) {
         String methodName = CLASS_NAME + ".findByIdApi()";
         log.info("{}, received uuid from path variable: {}", methodName, id);
         return studentService.findById(id);
+    }
+
+    @GetMapping("find/email/{email}")
+    public StudentDto findByEmailApi(@PathVariable String email) {
+        String methodName = CLASS_NAME + ".findByEmailApi()";
+        log.info("{}, received email from path variable: {}", methodName, email);
+        return studentService.findByEmail(email);
+    }
+
+    @GetMapping("find/email/name/{email}/{name}")
+    public StudentDto findByEmailApi(@PathVariable String email, @PathVariable String name) {
+        return studentService.findByEmailAndName(email, name);
+    }
+
+    @GetMapping("find/custom")
+    public List<StudentDto> findByCustomQueryApi() {
+        return studentService.findAllStudentsWithCustomCriteria();
     }
 
     @GetMapping("find")

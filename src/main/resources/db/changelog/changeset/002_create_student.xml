@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                   https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+    <changeSet id="1" author="abdelaziz">
+        <createTable tableName="student">
+            <column name="id" type="varchar">
+                <constraints primaryKey="true" primaryKeyName="student_pk"/>
+            </column>
+            <column name="name" type="varchar(36)"/>
+            <column name="age" type="int" defaultValue="0" defaultOnNull="false"/>
+            <column name="degree" type="float" defaultOnNull="false"/>
+            <column name="email" type="varchar" defaultOnNull="false">
+                <constraints unique="true" uniqueConstraintName="student_email_uindex"/>
+            </column>
+            <column name="phone" type="varchar" defaultOnNull="false"/>
+            <column name="enrollment_date" type="date" defaultOnNull="false"/>
+            <column name="address_id" type="varchar(36)" defaultOnNull="false">
+                <constraints validateForeignKey="true" foreignKeyName="student_address_id_fk"/>
+            </column>
+        </createTable>
+
+        <rollback>
+            <dropTable tableName="student"/>
+        </rollback>
+    </changeSet>
+
+</databaseChangeLog>

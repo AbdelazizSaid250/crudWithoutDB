@@ -10,7 +10,13 @@ public interface StudentService {
 
     StudentDto findById(String id);
 
+    StudentDto findByEmail(String email);
+
+    StudentDto findByEmailAndName(String email, String name);
+
     List<StudentDto> findAll();
+
+    List<StudentDto> findAllStudentsWithCustomCriteria();
 
     void update(String id, StudentDto studentDto);
 
